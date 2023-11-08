@@ -1,0 +1,2 @@
+;Sets a delay between octave swaps to avoid triggering the octave bug. Usually this should be set to around 2x your average in-game ping.
+OctaveDelay,130

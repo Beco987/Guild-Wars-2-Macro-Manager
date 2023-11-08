@@ -1,0 +1,6 @@
+v1.3
+ - Added singpleplayer song compatibility (WORK IN PROGRESS)
+ - Added Octave Delay settings for use in singleplayer songs
+ - Changed formatting in the New Song menu and added new description
+ - Fixed Bug with tempo changes
+ - Added new songs
