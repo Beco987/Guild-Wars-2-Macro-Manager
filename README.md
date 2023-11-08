@@ -12,7 +12,7 @@
 <section id="about">
 
 # About GW2MM
-  <p> GW2MM is an automated music player for playing MIDI songs in Guild Wars 2 across multiple player characters. It currently supports up to five accounts playing simultaneously.</p>
+  <p> GW2MM is an automated music player for playing MIDI songs in Guild Wars 2 across multiple player characters. It currently supports up to five accounts playing simultaneously, and does not work with Flute, Horn, or Choir Bell.</p>
 </section>
 
 ### Prerequisites
