@@ -1,4 +1,4 @@
-﻿#SingleInstance Force
+#SingleInstance Force
 #NoEnv
 ;------------------------------------ Main Buttons ----------------------------------------;
 InfoButton:
@@ -166,7 +166,7 @@ NewSongOkButton:
 	;Convert Midi to Csv
 	FileDelete, %NewSongTitle%.bat
 	FileAppend, echo `%cd`%`r`n"./Midicsv.exe" "./Midi/%NewSongTitle%.mid" "./Csv/%NewSongTitle%.csv", %NewSongTitle%.bat
-	Run, %NewSongTitle%.bat
+	Run, %NewSongTitle%.bat, Hide
 
 	;Refresh GUI
 	HasSelectedFile := false
