@@ -1,3 +1,7 @@
+v1.4
+ - Fixed bug where the tempo would be affected by the tempo of the previous song
+ - Hide the midicsv program whenever it runs
+ - Fixed description for the octave delay variable
 v1.3
  - Added singpleplayer song compatibility (WORK IN PROGRESS)
  - Added Octave Delay settings for use in singleplayer songs
