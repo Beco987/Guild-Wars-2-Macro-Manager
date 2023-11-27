@@ -1,4 +1,4 @@
-﻿#SingleInstance Force
+#SingleInstance Force
 #NoEnv
 global MidiIndex := 0
 global Track1 := []
@@ -549,9 +549,8 @@ TrackPlayer:
 		}
 	}
 	Gosub, RefreshPlayers
+	Reload
 return
-
-
 
 OpportunisticSwaps(a1, a2)
 {
@@ -988,6 +987,7 @@ OnePlayer:
 				NotesToPlay(nextKey, tempotemp, DefaultTempo, DelayToPlay[A_Index], counter)
 		}
 	}
+	Reload
 return
 
 DupeSeparation(notes, tempotemp, DefaultTempo, DelayToPlay, counter)
