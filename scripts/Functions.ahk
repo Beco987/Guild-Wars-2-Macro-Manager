@@ -1,4 +1,4 @@
-#SingleInstance Force
+﻿#SingleInstance Force
 #NoEnv
 global MidiIndex := 0
 global Track1 := []
@@ -106,6 +106,7 @@ return
 SongPlayer:
 	Gui, Submit, Nohide
 	NumberOfPlayers := 1
+	DefaultTempo := 1
 
 	; Make adjustments to Default Tempo based on data from Data.csv
 	Data := []
@@ -127,7 +128,7 @@ SongPlayer:
 	}
 
 	Tempo := [], TempoDuration := [], IsNotNote := [], VolumesDif := [], DelayToPlay := [], Volumes := [], Durations := [], Notes := [], TrackHolder := [], KeyState := []
-	postnotes := false, trackcounter = 0
+	postnotes := false, trackcounter = 0, pzero := 0
 	Loop, %ArrayIndex%
 	{
 		Volume%ArrayIndex% := ""
@@ -228,7 +229,8 @@ SongPlayer:
 			}
 			if (subIndex = 4 && tempoer = true){
 				tempy = %var%
-				if (duration != prevDuration){
+				
+				;if (duration != prevDuration){
 					if((postnotes = false && pzero = 0) || (postnotes = true)){
 						outTemp := "B"
 						outTemp .= tempy
@@ -239,7 +241,7 @@ SongPlayer:
 						prevDuration := duration
 						pzero = 1
 					}
-				}
+				;}
 			}
 			if(subIndex = 6 && record = true && var > 0){
 				postnotes := true
@@ -253,7 +255,26 @@ SongPlayer:
 			}
 		}
 	}
-	
+	Loop 25
+		{
+			Track%A_Index% := []
+			Track%A_Index%Vol := []
+			Track%A_Index%Duration := []
+		}
+		ArrayIndex += 1
+		Loop %ArrayIndex%
+		{
+			tracker := TrackHolder%A_Index%
+			note := Notes%A_Index%
+			Track%tracker%.Push(note)
+			dur := Durations%A_Index%
+			Track%tracker%Duration.Push(dur)
+			vol := Volume%A_Index%
+			Track%tracker%Vol.Push(vol)
+			if (trackcounter != tracker){
+				trackcounter++
+			}
+		}
 	if (NumberOfPlayers = 1)
 		GoSub, OnePlayer
 	else
@@ -261,27 +282,6 @@ SongPlayer:
 return
 
 TrackPlayer:
-	Loop 25
-	{
-		Track%A_Index% := []
-		Track%A_Index%Vol := []
-		Track%A_Index%Duration := []
-	}
-	ArrayIndex += 1
-	Loop %ArrayIndex%
-	{
-		tracker := TrackHolder%A_Index%
-		note := Notes%A_Index%
-		Track%tracker%.Push(note)
-		dur := Durations%A_Index%
-		Track%tracker%Duration.Push(dur)
-		vol := Volume%A_Index%
-		Track%tracker%Vol.Push(vol)
-		if (trackcounter != tracker){
-			trackcounter++
-		}
-	}
-
 	;;;;;;;;;;;;;;The below section merges notes on occurring on the same beat, adds octave swaps, and replaces the notes with keys mapped for output to specific windows. This process is repeated across all 5 Tracks;;;;;;;;;;;;;
 
 	;;;;;;;;;;;Track1;;;;;;;;;;
@@ -380,6 +380,10 @@ TrackPlayer:
 	;Primary song-playing loop
     songLength := KeysToPlay.Length()
 	Loop %songLength% {
+		if (Stop = true)
+			{
+				break
+			}
 		item := KeysToPlay[A_Index]
 		first := SubStr(item, 1, 1)
 		if (first == "B"){
@@ -549,7 +553,6 @@ TrackPlayer:
 		}
 	}
 	Gosub, RefreshPlayers
-	Reload
 return
 
 OpportunisticSwaps(a1, a2)
@@ -874,26 +877,6 @@ CombineFlags(a1, a2, a3, a4, dupes) {
 
 ;-------------------------------------------------- SINGLEPLAYER FUNCTIONS -------------------------------------------------------;
 OnePlayer:
-	Loop 25
-	{
-		Track%A_Index% := []
-		Track%A_Index%Vol := []
-		Track%A_Index%Duration := []
-	}
-	ArrayIndex += 1
-	Loop %ArrayIndex%
-	{
-		tracker := TrackHolder%A_Index%
-		note := Notes%A_Index%
-		Track%tracker%.Push(note)
-		dur := Durations%A_Index%
-		Track%tracker%Duration.Push(dur)
-		vol := Volume%A_Index%
-		Track%tracker%Vol.Push(vol)
-		if (trackcounter != tracker){
-			trackcounter++
-		}
-	}
 	;;;;;;;;;;;;;;The below section merges notes on occurring on the same beat, adds octave swaps, and replaces the notes with keys mapped for output to specific windows. This process is repeated across all 5 Tracks;;;;;;;;;;;;;
 
 	;;;;;;;;;;;Track1;;;;;;;;;;
@@ -944,6 +927,7 @@ OnePlayer:
 	Track1Duration := OutNotes.num.Clone()
 	Track1 := OutNotes.alpha.Clone()
 
+	
 	Track1 := AddSwapsOnePlayer(Track1)
 	replacements := [["z", "1"], ["x", "2"], ["c", "3"], ["v", "4"], ["b", "5"], ["n", "6"], ["m", "7"], ["a", "1"], ["s", "2"], ["d", "3"], ["f", "4"], ["g", "5"], ["h", "6"], ["j", "7"], ["q", "1"], ["w", "2"], ["e", "3"], ["r", "4"], ["t", "5"], ["y", "6"], ["u", "7"], ["i", "8"]]
 	Track1 := replaceChars(Track1, replacements)
@@ -952,6 +936,7 @@ OnePlayer:
 	Track1Duration := OutArrays.num.Clone()
 	Track1 := OutArrays.alpha.Clone()
 
+	
 	;;;;;;;;;merge tracks;;;;;;;;;
 	timeLength := Track1Duration.Length()
 	Loop %timeLength%
@@ -971,6 +956,10 @@ OnePlayer:
 	startTime := 0
 	endTime := 0
 	Loop %songLength% {
+		if (Stop = true)
+		{
+			break
+		}
 		MidiIndex := A_Index
 		item := Track1[A_Index]
 		first := SubStr(item, 1, 1)
@@ -987,7 +976,7 @@ OnePlayer:
 				NotesToPlay(nextKey, tempotemp, DefaultTempo, DelayToPlay[A_Index], counter)
 		}
 	}
-	Reload
+	;Reload
 return
 
 DupeSeparation(notes, tempotemp, DefaultTempo, DelayToPlay, counter)

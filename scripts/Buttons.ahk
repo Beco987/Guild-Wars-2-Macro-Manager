@@ -1,4 +1,4 @@
-#SingleInstance Force
+﻿#SingleInstance Force
 #NoEnv
 ;------------------------------------ Main Buttons ----------------------------------------;
 InfoButton:
@@ -65,6 +65,7 @@ OpenEditorButton:
 return
 
 TogglePlay:
+	Stop := false
 	Gosub, Songplayer
 return
 
@@ -90,6 +91,16 @@ SettingsSaveButton:
 				newline := "OctaveDelay," OctaveDelay "`n"
 				toAppend .= newline
 			}
+			else if (InStr(entry,"AlwaysOnTop"))
+			{
+				newline := "AlwaysOnTop," AlwaysOnTop "`n"
+				toAppend .= newline
+			}
+			else if (InStr(entry,"IsTransparent"))
+			{
+				newline := "IsTransparent," IsTransparent "`n"
+				toAppend .= newline
+			}
 			else
 			{
 				if (A_Index = DataLen)
@@ -99,6 +110,7 @@ SettingsSaveButton:
 				toAppend .= newline
 			}
 		}
+	ClicksEnabled := ClicksSetting
 	Delay := OctaveDelay
 	Delay2 := Ceil(Delay/10)
 	
@@ -108,6 +120,14 @@ return
 
 OctaveDelayExplanation:
 	Gui,OctaveDelayExplanation:Show,w200 h150,Octave Delay Explanation
+return
+
+AlwaysOnTopExplanation:
+	Gui,AlwaysOnTopExplanation:Show,w200 h150,AlwaysOnTop Explanation
+return
+
+TransparencyExplanation:
+	Gui,TransparencyExplanation:Show,w200 h150,Transparency Explanation
 return
 
 ;------------------------------------ New Song Buttons ----------------------------------------;

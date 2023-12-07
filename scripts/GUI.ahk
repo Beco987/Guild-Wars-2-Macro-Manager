@@ -1,4 +1,4 @@
-#SingleInstance Force
+﻿#SingleInstance Force
 #NoEnv
 Gui, Margin, 0, 0
 Gui, Font,, Verdana
@@ -26,18 +26,29 @@ Gui, Add, Picture, x310 y390 w80 h80 gControlsButton, Images\Return.png
 Gui Add, Text, x310 y470 w80 h15 Center, Controls
 Gui, Add, Button, x380 y0 w20 h20 gInfoButton, ?
 Gui,Add,Button,x360 y0 w20 h20 gSettingsButton,⚙
+if (OnTopEnabled)
+    Gui, +AlwaysOnTop
+Gui, Show,,GW2AhkPlayer
+if (TransparentEnabled)
+    WinSet, Transparent, 200, GW2AhkPlayer
 Gui, Show,,GW2MM
 
 ;------------------------------- Settings GUI ------------------------------;
 Gui,SettingsGui:Add,Text,x0 y3 w80 h20, Octave Delay :
 Gui,SettingsGui:Add,Button,x170 y0 w20 h20 gOctaveDelayExplanation,?
 Gui,SettingsGui:Add,Edit,x100 y0 w50 h20 vOctaveDelay,%Delay%
+Gui,SettingsGui:Add,CheckBox, x0 y30 w170 h20 vAlwaysOnTop Checked%OnTopEnabled%, Enable Always On Top?
+Gui,SettingsGui:Add,Button,x170 y30 w20 h20 gAlwaysOnTopExplanation,?
+Gui,SettingsGui:Add,CheckBox, x0 y50 w170 h20 vIsTransparent Checked%TransparentEnabled%, Enable Transparency?
+Gui,SettingsGui:Add,Button, x170 y50 w20 h20 gTransparencyExplanation,?
 Gui SettingsGui:Add,Button, x0 y160 w200 h40 gSettingsSaveButton, Save
+Gui SettingsGui:Add,Button, x0 y160 w200 h40 gSettingsSaveButton, Save
+
 
 ;------------------------------- Info GUI ------------------------------;
 Gui, Info:Add,Link,x0 y0 w200 h40 vText1,Please check out this <a href="https://docs.google.com/document/d/1Ek9sHKd0PQw9vmecujCG7tVtNIkKMtPnIPPEBio5ZoU/edit?usp=sharing">doc</a> for guidance on using this application.
 Gui, Info:Add,Picture, x20 y30 w160 h160, Images\logo.png
-Gui, Info:Add,Text,x0 y200 w200 h40 Center,Version 1.4
+Gui, Info:Add,Text,x0 y200 w200 h40 Center,Version 1.5
 GuiControl +BackgroundTrans, Text1
 
 ;------------------------------- New Song GUI ------------------------------;
@@ -70,5 +81,11 @@ Gui,ControlsExplanation:Add,Text,x0 y0 w200 h150, F1 - Plays the selected song`n
 
 ;------ Octave Explanation GUI ------;
 Gui,OctaveDelayExplanation:Add,Text,x0 y0 w200 h150, This Delay is used in Singleplayer scripts to prevent the octave bug. Usually you'll want to set this to roughly 2x your average in-game ping.
+
+;------ AlwaysOnTop Explanation GUI ------;
+Gui,AlwaysOnTopExplanation:Add,Text,x0 y0 w200 h150, Sets the application to always be visible. This is useful if you want to play Guild Wars 2 in Fullscreen.
+
+;------ Transparency Explanation GUI ------;
+Gui,TransparencyExplanation:Add,Text,x0 y0 w200 h150, Sets the application to be transparent. You may like this if you play Guild Wars 2 in Fullscreen.
 
 Winset, Region, w300 h500

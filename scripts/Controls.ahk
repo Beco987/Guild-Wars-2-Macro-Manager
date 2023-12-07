@@ -2,6 +2,7 @@
 #NoEnv
 ;------------------------------- Controls ------------------------------;
 F1::
+	Stop := false
 	Gosub, Songplayer
 return
 
@@ -11,7 +12,8 @@ return
 
 F3::
 	Gosub, RefreshPlayers
-	Reload
+	Gui, Show,,GW2MM
+	Stop := true
 return
 
 F4::

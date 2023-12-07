@@ -5,7 +5,19 @@ AfterNames := []
 TestString = col1,col2,col3,col4`nname,players,tempo,description
 IfNotExist, %F1% 
   FileAppend,%TestString%, %F1% 
-  
+
+FileRead, FileContent, %F1%
+newContent := ""
+Loop, parse, FileContent, `n, `r
+{
+	if RegExMatch(A_LoopField, "[^,]+", match) ; match anything but comma
+		newContent .= A_LoopField "`n"
+	else
+		continue
+}
+FileDelete, %F1%
+FileAppend, %newContent%, %F1%
+
 Loop,Read,%F1%
   {
     Line%A_Index% := A_LoopReadLine

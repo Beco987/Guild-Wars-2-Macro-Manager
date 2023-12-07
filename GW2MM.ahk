@@ -33,14 +33,24 @@ Loop, read, Config.txt
 }
 DataLen := Data.Length()
 Loop %DataLen%
-{
-    if (Data[A_Index] == "OctaveDelay")
-        {
-            OctaveDelay := Data[A_Index+1]
-        }	
-}
+    {
+        if (Data[A_Index] == "OctaveDelay")
+            {
+                OctaveDelay := Data[A_Index+1]
+            }	
+        if (Data[A_Index] == "AlwaysOnTop")
+            {
+                AlwaysOnTop := Data[A_Index+1]
+            }	
+        if (Data[A_Index] == "IsTransparent")
+            {
+                IsTransparent := Data[A_Index+1]
+            }	
+    }
 global Delay := OctaveDelay
 global Delay2 := Ceil(Delay/10)
+global TransparentEnabled := IsTransparent
+global OnTopEnabled := AlwaysOnTop
 
 #Include, scripts/GUI.ahk
 
