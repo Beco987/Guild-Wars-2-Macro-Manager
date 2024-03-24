@@ -30,7 +30,7 @@ ReloadSongs:
 		{
 			if (Data[A_Index] == noExt)
 			{
-				FormatTime, FileDate, %A_LoopFileTimeCreated%, MM-dd-yy
+				FormatTime, FileDate, %A_LoopFileTimeCreated%, yyyy-MM-dd
 				LV_Add("", noExt, Data[A_Index+1], FileDate)
 				LV_ModifyCol(2, "Integer")
 			}

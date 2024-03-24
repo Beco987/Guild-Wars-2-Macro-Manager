@@ -47,9 +47,9 @@ F9::
 return
 
 F10::
-	DefaultTempo += 0.05
+	DefaultTempo += 0.01
 return
 
 F11::
-	DefaultTempo -= 0.05
+	DefaultTempo -= 0.01
 return

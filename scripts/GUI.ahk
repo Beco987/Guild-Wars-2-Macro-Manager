@@ -48,7 +48,7 @@ Gui SettingsGui:Add,Button, x0 y160 w200 h40 gSettingsSaveButton, Save
 ;------------------------------- Info GUI ------------------------------;
 Gui, Info:Add,Link,x0 y0 w200 h40 vText1,Please check out this <a href="https://docs.google.com/document/d/1Ek9sHKd0PQw9vmecujCG7tVtNIkKMtPnIPPEBio5ZoU/edit?usp=sharing">doc</a> for guidance on using this application.
 Gui, Info:Add,Picture, x20 y30 w160 h160, Images\logo.png
-Gui, Info:Add,Text,x0 y200 w200 h40 Center,Version 1.5
+Gui, Info:Add,Text,x0 y200 w200 h40 Center,Version 1.6
 GuiControl +BackgroundTrans, Text1
 
 ;------------------------------- New Song GUI ------------------------------;
@@ -77,7 +77,7 @@ Gui,DescriptionExplanation:Add,Text,x0 y0 w200 h100, This is where you can type 
 Gui,PlayersExplanation:Add,Text,x0 y0 w200 h100, Add the number of players that are used in this song. If this is set to 1 player, it will merge all the tracks in the midi and use a different method while playing it.
 
 ;------ Controls Explanation GUI ------;
-Gui,ControlsExplanation:Add,Text,x0 y0 w200 h150, F1 - Plays the selected song`nF2 - Pause/Play the song`nF3 - Reloads the application`nF4 - Exits the application`nF5 - Sets window as Player 1`nF6 - Sets window as Player 2`nF7 - Sets window as Player 3`nF8 - Sets window as Player 4`nF9 - Sets window as Player 5`nF10 - Reduces tempo by 5 percent`nF11 - Increases tempo by 5 percent
+Gui,ControlsExplanation:Add,Text,x0 y0 w200 h150, F1 - Plays the selected song`nF2 - Pause/Play the song`nF3 - Reloads the application`nF4 - Exits the application`nF5 - Sets window as Player 1`nF6 - Sets window as Player 2`nF7 - Sets window as Player 3`nF8 - Sets window as Player 4`nF9 - Sets window as Player 5`nF10 - Reduces tempo by 1 percent`nF11 - Increases tempo by 1 percent
 
 ;------ Octave Explanation GUI ------;
 Gui,OctaveDelayExplanation:Add,Text,x0 y0 w200 h150, This Delay is used in Singleplayer scripts to prevent the octave bug. Usually you'll want to set this to roughly 2x your average in-game ping.

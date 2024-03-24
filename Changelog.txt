@@ -1,3 +1,5 @@
+V1.6
+ - The song update. Added most of the songs in my personal library.
 v1.5
  - Actually fixed bug where the tempo would be affected by the tempo of the previous song
  - Script no longer forces a reload between every song
